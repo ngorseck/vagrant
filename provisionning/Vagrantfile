@@ -1,0 +1,26 @@
+Vagrant.configure("2") do |config|
+  
+  config.vm.define "dockerserver" do |dockerserver|
+  
+    dockerserver.vm.box = "bento/ubuntu-22.04"
+
+    dockerserver.vm.box_check_update = false
+
+    dockerserver.vm.network "forwarded_port", guest: 80, host: 80
+    dockerserver.vm.network "forwarded_port", guest: 8080, host: 8080
+
+    dockerserver.vm.network "private_network", type: "static", ip: "192.168.0.11"
+
+    dockerserver.vm.synced_folder "./dockerworkspace", "/opt/docker/manifest"
+
+    dockerserver.vm.provider "virtualbox" do |vb|
+      vb.gui = false
+      vb.name = "dockerserver"
+      vb.memory = 2048
+      vb.cpus = 2
+    end
+
+    dockerserver.vm.provision "shell", path: "install-docker.sh"
+    dockerserver.vm.provision "shell", path: "install-jenkins.sh"
+  end
+end

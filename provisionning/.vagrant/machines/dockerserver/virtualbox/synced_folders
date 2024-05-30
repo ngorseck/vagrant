@@ -1,0 +1,1 @@
+{"virtualbox":{"/opt/docker/manifest":{"guestpath":"/opt/docker/manifest","hostpath":"C:/SECK/vagrant/provisionning/dockerworkspace","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"C:/SECK/vagrant/provisionning","disabled":false,"__vagrantfile":true}}}
