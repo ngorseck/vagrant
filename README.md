@@ -6,7 +6,7 @@
 ```
 Environnement: 
 vagrant
-VirtualBx
+VirtualBox
 
 ```
 
