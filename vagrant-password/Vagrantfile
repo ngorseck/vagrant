@@ -1,0 +1,22 @@
+Vagrant.configure("2") do |config|
+
+  config.vm.define "valid"  do |valid|
+    
+    valid.vm.box = "generic/ubuntu2204"
+    valid.vm.hostname = "valid"
+    valid.vm.box_check_update = false
+
+    valid.vm.provider "virtualbox" do |domain|
+      domain.gui = true
+      domain.name = "valid-server"
+      domain.cpus = 2
+      domain.memory = 1024
+    end
+
+    #valid.ssh.username="seck"
+    #valid.ssh.password="passer123!"
+    #valid.ssh.keys_only=false
+    #valid.ssh.insert_key=false
+    #valid.ssh.shell="bash"
+  end
+end

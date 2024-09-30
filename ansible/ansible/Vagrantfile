@@ -1,0 +1,44 @@
+Vagrant.configure("2") do |config|
+
+  config.vm.define "ansibleserver" do |ansibleserver|
+  
+    ansibleserver.vm.box = "bento/ubuntu-22.04"
+
+    ansibleserver.vm.box_check_update = false
+
+    ansibleserver.vm.hostname = "server"
+
+    ansibleserver.vm.network "private_network", type: "static", ip: "192.168.0.10"
+
+    ansibleserver.vm.synced_folder "./ansible-workspace", "/opt/ansible/manifest"
+
+    ansibleserver.vm.provider "virtualbox" do |vb|
+      vb.gui = false
+      vb.name = "ansibleserver"
+      vb.memory = 1024
+      vb.cpus = 1
+    end
+
+    ansibleserver.vm.provision "shell", path: "install-ansible.sh"
+  end
+
+  config.vm.define "ansibleclient" do |ansibleclient|
+  
+    ansibleclient.vm.box = "bento/ubuntu-22.04"
+    ansibleclient.vm.hostname = "client"
+    ansibleclient.vm.box_check_update = false
+
+    ansibleclient.vm.network "forwarded_port", guest: 80, host: 80
+    ansibleclient.vm.network "forwarded_port", guest: 8080, host: 8080
+    ansibleclient.vm.network "forwarded_port", guest: 5432, host: 5432
+
+    ansibleclient.vm.network "private_network", type: "static", ip: "192.168.0.11"
+
+    ansibleclient.vm.provider "virtualbox" do |vb|
+      vb.gui = false
+      vb.name = "ansibleclient"
+      vb.memory = 1024
+      vb.cpus = 1
+    end
+  end
+end

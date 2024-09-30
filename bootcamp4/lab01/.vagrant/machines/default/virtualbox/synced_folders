@@ -1,0 +1,1 @@
+{"virtualbox":{"/opt/tomcat/webapp":{"guestpath":"/opt/tomcat/webapp","hostpath":"C:/SECK/vagrant/bootcamp4/lab01/siteweb","disabled":false,"__vagrantfile":true}}}

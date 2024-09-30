@@ -1,0 +1,8 @@
+---
+
+- name: Install apache and mariadb
+  hosts: all
+  remote_user: vagrant
+  roles:
+    - apache
+    - mariadb
